@@ -1,2 +1,2 @@
 # umlinfo2480
-Work for 2025
+Work for 2026
