@@ -1,0 +1,43 @@
+<h3>My Component</h3>
+
+<p id="e7ab04f1-1f21-4c0c-aabd-078030b87b42" class=""><strong>Exercise</strong>: In the exercises folder, create a file <code>myComponent.bx</code> which is a class. In component.bxm, make a form
+    that accepts 3 numbers. Create a form on this page which accepts 3 inputs.  When the form is submitted, send the three numbers to a function in myComponent.bx and
+    display the product of the three numbers on the page.</p>
+
+<br />
+<p><strong>Answer</strong>:</p>
+
+<!---Connect to myComponent.bx file--->
+<bx:set myComponent = createObject("myComponent") />
+
+<p>Enter numbers in form below to multiply them together</p><br />
+<form action="#cgi.script_name#?p=#p#" method="post">
+    <div class="mb-3">
+        <label for="numOne" class="form-label">First Number</label>
+        <input type="number" class="form-control" id="numOne" name="first" placeholder="First Number" required>
+     </div>
+     <div class="mb-3">
+        <label for="numTwo" class="form-label">Second Number</label>
+        <input type="number" class="form-control" id="numTwo" name="second" placeholder="Second Number" required>
+     </div>
+    <div class="mb-3">
+        <label for="numthree" class="form-label">Third Number</label>
+        <input type="number" class="form-control" id="numThree" name="third" placeholder="Third Number" required>
+     </div>
+     <div>
+        <button class="btn btn-primary">Submit</button>
+     </div>
+</form>
+
+<br />
+
+<!---Check that keys exist, and show values of each key --->
+<bx:if (structKeyExists(form, "first") && structKeyExists(form, "second") && structKeyExists(form, "third"))>
+   The First Number is: <bx:output>#first#</bx:output><br />
+   The Second Number is: <bx:output>#second#</bx:output><br />
+   The Third Number is: <bx:output>#third#</bx:output><br />
+
+<!---Call multiplyTheNumbers function that is in the myComponent.bx file --->
+   <br />
+   The product of these three numbers is: <bx:output>#myComponent.multiplyTheNumbers(first,second,third)#</bx:output>
+</bx:if>

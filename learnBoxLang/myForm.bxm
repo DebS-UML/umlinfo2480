@@ -1,0 +1,38 @@
+<h3>My Form</h3>
+<p>Use HTML to create a form which submits to the same page. Make your form with 5 inputs that coincide with the 
+    properties in your database. On the page include <code>&lt;bx:dump var="#form#" label="The Form Data" /></code> 
+    so you can test the submission of the form.</p>
+
+<br /><br />
+<p><strong>Answer</strong>: Form to enter values of properties of books</p> 
+
+<form action="#cgi.script_name#?p=#p#" method="post">
+    <div class="mb-3">
+        <label for="bookTitle" class="form-label">Title</label>
+        <input type="text" class="form-control" id="bookTitle" name="title" placeholder="Title">
+     </div>
+     <div class="mb-3">
+        <label for="authorLastName" class="form-label">Author Last Name</label>
+        <input type="text" class="form-control" id="authorLastName" name="lName" placeholder="Author Last Name">
+     </div>
+    <div class="mb-3">
+        <label for="authorFirstName" class="form-label">Author First Name</label>
+        <input type="text" class="form-control" id="authorFirstName" name="fName" placeholder="Author First Name">
+     </div>
+    <div class="mb-3">
+        <label for="copyrightYear" class="form-label">Copyright Year</label>
+        <input type="number" class="form-control" id="copyrightYear" name="copyright" placeholder="Copyright Year">
+     </div>
+    <div class="mb-3">
+        <label for="bookPublisher" class="form-label">Publisher</label>
+        <input type="text" class="form-control" id="bookPublisher" name="publisher" placeholder="Publisher">
+     </div>
+     <div>
+        <button class="btn btn-primary">Submit</button>
+     </div>
+</form>
+
+<br /><br />
+<p>Display contents of Form structure using <code>&lt;bx:dump var="#form#" label="The Form Data" /></code> </p> 
+
+<bx:dump var="#form#" label="The Form Data" />

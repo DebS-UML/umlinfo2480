@@ -1,0 +1,27 @@
+<p id="3da8d607-08b2-47cd-8566-7392c3bb93e7" class=""><strong>Exercise</strong>: Below, add &lt;bx:output&gt;#now()#&lt;/bx:output&gt;. 
+    Open the page in a browser and you should see the current date and time as a time stamp.</p>
+
+        <br />
+        <p><strong>Answer</strong>: Display time stamp using now()</p>
+        <bx:output>#now()#</bx:output>
+
+
+    <hr/>
+         <br />
+        <p id="a7da509e-eedc-490e-909e-887b4784668b" class=""><strong>Exercise</strong>: On the next 5 lines, use different masks (find them on the link above) to make the date appear
+            differently.</p>
+        
+        <br />
+        <!--- https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/temporal/dateformat
+        --->
+        <p><strong>Answer</strong>: Different masks used with DateFormat()</p>
+        <bx:output>
+        <ul>
+        <li>Mask short: #DateFormat(date=now(), mask="short")#</li>
+        <li>Mask medium: #DateFormat(date=now(), mask="medium")#</li>
+        <li>Mask long: #DateFormat(date=now(), mask="long")#</li>
+        <li>Mask full: #DateFormat(date=now(), mask="full")#</li>
+        <li>Mask ISO: #DateFormat(date=now(), mask="ISO")#</li>
+        </ul>
+        
+        </bx:output>

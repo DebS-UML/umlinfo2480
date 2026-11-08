@@ -1,0 +1,27 @@
+<p><strong>Exercise:</strong>Make an ordered list ( using the ol and li tags ). For each item, output a math problem using 
+    each operator least once and two numbers between 1 and 9 ( i.e. 1+9=????? ).</p>
+
+<br /><br />
+<p><strong>Answer</strong>: Not all
+operators in the list were included; results of Range operators
+gave an error: "Can't cast Range to a string"</p>
+<!--- Math operators 
+    https://boxlang.ortusbooks.com/boxlang-language/syntax/operators#arithmetic-operators
+--->
+<bx:output>
+<ol>
+    <li>Add 2+5 = #2+5#</li>
+    <li>Subtract 7-3 = #7-3#</li>
+    <li>Multiply 4*6 = #4*6#</li>
+    <li>Divide 9/2 = #9/2#</li>
+    <li>Exponentiate 3^2 = #3^2#</li>
+    <li>Modulus 8%3 = #8%3#</li>
+    <li>Integer Divide 7\3 = #7\3#</li>
+    <li>Increment 2++ = #2++#</li>
+    <li>Increment ++2 = #++2#</li>
+    <li>Decrement 4-- = #4--#</li>
+    <li>Decrement --4 = #--4#</li>
+    <li>Negate with Grouping -(1+3) = #-(1+3)#</li>
+    <li>Positive +2 = #+2#</li>
+</ol>
+</bx:output>

@@ -1,0 +1,57 @@
+Hello!
+
+<br /><br />
+<p>A link to this ShowMe.bxm file has been added
+to the toc.bxm file by adding:</p>
+        <code>
+                &lt;li&gt;&lt;a href="#cgi.script_name#?p=ShowMe"&gt;&lt;/a&gt;&lt;/li&gt;
+        </code>
+
+<p>This passes in the variable <code>p</code></p>
+
+<br /><br />
+<p>In the learnBoxLang/index.bxm file, the line that references the toc.bxm file 
+        uses the <code>include</code> component:</p>
+        <code>
+                &lt;bx:include template="toc.bxm"&gt;
+        </code>
+<br />
+<p>In the learnBoxLang/index.bxm file, there is also a line that uses the <code>include</code> component 
+        along with the value of the <code>p</code> variable inside a try-catch block, this would
+        be the reference to this ShowMe.bxm file</p>
+
+       <code> 
+                &lt;bx:include template="#p#.bxm"&gt;
+        </code>
+
+<br /><br />
+<p>This was the URL of this page when I was doing this assignment before I 
+        set the name and port of the site using CommandBox:</p>
+        <code>
+                http://127.0.0.1:56343/index.bxm?p=ShowMe
+        </code>
+
+<p>This is the URL of this page after doing the Configuring Your Server step</p>
+        <code>
+                http://webclass.local/learnBoxLang/index.bxm?p=ShowMe
+        </code>
+
+<br /><br />
+<p>The URL structure can be seen using <code>dump</code> and which shows the variable key/value pairs:</p>
+        <code>
+                &lt;bx:dump var="#url#" label="URL" /&gt;
+        </code>
+
+<br /><br />
+<bx:dump var="#url#" label="URL" />
+
+
+<br /><br />
+<p>And the above <code>dump</code> display shows the addition of two more key/value pairs when the following 
+        is appended to the end of the URL:</p>
+        <code>
+                &name=Bob&lastname=Marley
+        </code>
+
+
+

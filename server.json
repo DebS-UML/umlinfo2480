@@ -7,5 +7,11 @@
     },
     "scripts":{
         "onServerInitialInstall":"install bx-mysql"
+    },
+    "web":{
+        "host":"webclass.local",
+        "http":{
+            "port":"80"
+        }
     }
 }

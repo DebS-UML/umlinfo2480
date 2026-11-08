@@ -1,0 +1,48 @@
+<h3>My Variables</h3>
+<p id="a631de6b-7ec5-4bc0-a120-1d24205ecc0b" class=""><strong>Exercise:</strong> Create a new variable named <code>todayDate</code> and set it
+    today's date. </p>
+
+    <p><strong>Answer</strong>: </p>
+
+    <!--- Declare and initialize variable todayDate --->
+    <bx:set todayDate=#now()#>
+    The todayDate variable: <bx:output>#todayDate#</bx:output><br />
+    Is todayDate a date type of variable? <bx:output>#isValid("date",todayDate)#</bx:output>
+
+    <hr/>
+
+    <p id="b0b17cfe-e668-4793-b3e9-00e27a9325fa" class=""><strong>Exercise</strong>: Format the output for todayDate to be more 
+        human-readable version of the todayDate variable BUT don&#x27;t change the underlying variable.</p>
+
+    <p><strong>Answer</strong>: using short mask with DateFormat()</p>
+
+    <!--- using short mask with DateFormat() --->
+    Formatted todayDate: <bx:output>#DateFormat(date=todayDate, mask="short")#</bx:output>
+
+
+<hr/>
+
+    <p id="fdd75171-c4ef-49e8-af90-0149b2170f0f" class=""><strong>Exercise</strong>: Below, add up the price of your 5 books in
+        your Excel Project. Can you do it with only one variable name? Let&#x27;s call it <code>totalBookCost</code>. Hint: Start
+        with <code>&lt;bx:set totalBookCost=0&gt;</code> and go from there. Think you can do it? Don&#x27;t forget to output the
+        final amount to the page.</p>   
+
+    <p><strong>Answer</strong>: using compound add assignment operator for each book</p>
+
+    <!--- declare and initialize variable totalBookCost --->
+    <bx:set totalBookCost = 0>
+    <!--- add cost of bookOne using compound add assignment operator --->
+    <bx:set totalBookCost += 19.99>
+    <!--- add cost of bookTwo using compound add assignment operator --->
+    <bx:set totalBookCost += 19.99>
+    <!--- add cost of bookThree using compound add assignment operator --->
+    <bx:set totalBookCost += 52.95>
+    <!--- add cost of bookFour using compound add assignment operator --->
+    <bx:set totalBookCost += 27.50>
+    <!--- add cost of bookFive using compound add assignment operator --->
+    <bx:set totalBookCost += 29.95>
+    
+    <!--- https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/format/numberformat --->
+    <!--- using mask for dollar currency with NumberFormat() --->
+    <bx:output>The total book cost for five books: 
+    #NumberFormat(number=totalBookCost, mask="_$,9.99")#</bx:output>

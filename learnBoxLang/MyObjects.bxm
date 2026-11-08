@@ -1,0 +1,63 @@
+<h1>My Objects</h1>
+<p>take one of your 5 Books in Excel books and create a BoxLang structure out of it's metadata. 
+    Use multiple structures to model as much of the metadata as you can including data from all four Excel Sheets 
+    (or SQL Tables). When you are done, dump out each of the objects you created.</p>
+
+
+<p><strong>Answer</strong>: the myBook structure contains 6 structures: basicInfo, categoryInfo, 
+    authorInfo, publicationInfo, and physicalInfo. The structures contain the metadata 
+    about the books in the form of key/value pairs.</p>
+
+    <!--- https://boxlang.ortusbooks.com/boxlang-language/syntax/structures --->
+
+<bx:set myBook={
+    basicInfo: {
+        title:"All Systems Red",
+        copyrightYear:"2017",
+        price:19.99
+    },
+    categoryInfo: {
+        category: "Fiction",
+        genre: "Science Fiction"
+    },
+    authorInfo: {
+        authorFirstName:"Martha",
+        authorLastName:"Wells"
+    },
+    publicationInfo: {  
+        ISBN13:"978-1-250-21471-3",
+        language:"English",
+        binding:"Hardcover",
+    },
+    publisherInfo: {
+        publisher:"Tom Doherty Associates",
+        publisherCity:"New York"
+    },
+    physicalInfo: {
+        numPages:171,
+        height:8.25,
+        width:5.25,
+        thickness:0.625
+    }
+}>
+
+<p>The myBook structure contains the basicInfo structure:</p>
+<bx:dump var="#myBook.basicInfo#" label="basicInfo">
+
+<p>The myBook structure contains the categoryInfo structure:</p>
+<bx:dump var="#myBook.categoryInfo#" label="categoryInfo">
+
+<p>The myBook structure contains the authorInfo structure:</p>
+<bx:dump var="#myBook.authorInfo#" label="authorInfo">
+
+<p>The myBook structure contains the publicationInfo structure:</p>
+<bx:dump var="#myBook.publicationInfo#" label="publicationInfo">
+
+<p>The myBook structure contains the publisherInfo structure:</p>
+<bx:dump var="#myBook.publisherInfo#" label="publisherInfo">
+
+<p>The myBook structure contains the physicalInfo structure:</p>
+<bx:dump var="#myBook.physicalInfo#" label="physicalInfo">
+
+<p>The myBook structure:</p>
+<bx:dump var="#myBook#" label="myBook">

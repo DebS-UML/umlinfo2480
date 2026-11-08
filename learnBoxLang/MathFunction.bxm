@@ -1,0 +1,64 @@
+<h3>Math Functions</h3>
+<p><strong>Exercise</strong>: Using the function in the main article as a model, write a function that will multiply two numbers together. Call the function and pass in several different combination of numbers (i.e. <code>#addNumbers(5,3)# &lt;br/> #addNumbers(100,223)# </code> etc.)
+</p>
+<br />
+<p><strong>Answer</strong>:</p>
+
+<!--- put the <bx:output> around the whole group of lines - uses 1 set of <bx:output> tags--->
+<bx:output>
+    Using the multiplyNumbers function:<br />
+    multiply 2 and 3 = #multiplyNumbers(2,3)#<br />
+    multiply 11 and 4 = #multiplyNumbers(11,4)#<br />
+    multiply 5 and -8 = #multiplyNumbers(5,-8)#<br />
+</bx:output>
+
+<!--- function to accept 2 numeric arguments and return the value of the numbers multiplied together --->
+<bx:function name="multiplyNumbers" access="private" returntype = "numeric">
+    <bx:argument name="firstNum" type="numeric">
+    <bx:argument name="secondNum" type="numeric">
+    <bx:return #firstNum*secondNum#>
+</bx:function>
+
+<hr />
+<p><strong>Exercise</strong>: Can you make a form that accepts two numbers, submits it to the same page and then uses the function to add the two numbers together? All the information you need is in these docs.</p>
+
+<br />
+<p><strong>Answer</strong>:</p>
+<p>Enter in two numbers to multiply them together</p>
+
+<form action="#cgi.script_name#?p=#p#" method="post">
+    <div class="mb-3">
+        <label for="numOne" class="form-label">First Number</label>
+        <input type="number" class="form-control" id="numOne" name="one" placeholder="First Number" value="0" required>
+     </div>
+     <div class="mb-3">
+        <label for="numTwo" class="form-label">Second Number</label>
+        <input type="number" class="form-control" id="numTwo" name="two" placeholder="Second Number" value="0" required>
+     </div>
+     <div>
+        <button class="btn btn-primary">Submit</button>
+     </div>
+</form>
+
+<br />
+
+
+<!--- Even with a default value defined in the form fields, when this page is first opened
+    it showed an error because the keys (one and two) in the form were undefined.
+    The <bx:if> tag with structKeyExists() is used to check that the keys are defined
+    before going on to the next steps 
+    https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/struct/structkeyexists
+    https://boxlang.ortusbooks.com/boxlang-language/syntax/conditionals
+--->
+<bx:if (structKeyExists(form, "one") && structKeyExists(form, "two"))>
+
+    <p>Values of form fields when form was submitted:</p>
+
+    <bx:output>First Number: #one#</bx:output><br />
+    <bx:output>Second Number: #two#</bx:output><br />
+
+    <br />
+    <!--- call the multiplyNumbers function with the values from the form as arguments --->
+    <bx:output>The product of these two numbers: #multiplyNumbers(one, two)#</bx:output>
+</bx:if>
+    
