@@ -14,14 +14,29 @@
         <br />
         <!--- https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/temporal/dateformat
         --->
-        <p><strong>Answer</strong>: Different masks used with DateFormat()</p>
+        <p><strong>Answer</strong>: Different masks used with <code>DateFormat()</code> built-in styles and also
+            using named arguments.</p>
         <bx:output>
-        <ul>
-        <li>Mask short: #DateFormat(date=now(), mask="short")#</li>
-        <li>Mask medium: #DateFormat(date=now(), mask="medium")#</li>
-        <li>Mask long: #DateFormat(date=now(), mask="long")#</li>
-        <li>Mask full: #DateFormat(date=now(), mask="full")#</li>
-        <li>Mask ISO: #DateFormat(date=now(), mask="ISO")#</li>
-        </ul>
-        
+            <ul>
+                <li>Mask short: #DateFormat(date=now(), mask="short")#</li>
+                <li>Mask medium: #DateFormat(date=now(), mask="medium")#</li>
+                <li>Mask long: #DateFormat(date=now(), mask="long")#</li>
+                <li>Mask full: #DateFormat(date=now(), mask="full")#</li>
+                <li>Mask ISO: #DateFormat(date=now(), mask="ISO")#</li>
+            </ul>
+        </bx:output>
+
+
+        <!--- Added after chat 11-10-2026 session, with assistance from GitHub Copilot AI --->
+        <br />
+        <p><strong>Additional answers added after chat session 11-10-26</strong>: On the next 5 lines, 
+            use different masks with fixed patterns and using positional arguments.</p>
+        <bx:output>
+            <ul>
+                <li>Mask "MM-dd-yyyy": #DateFormat(now(), "MM-dd-yyyy ")#</li>
+                <li>Mask "MMM-dd-yyyy": #DateFormat(now(), "MMM-dd-yyyy")#</li>
+                <li>Mask "EEEE, MMMM dd, yyyy": #DateFormat(now(), "EEEE, MMMM dd, yyyy")#</li>
+                <li>Mask "MMMM dd, yyyy hh:mm:ss a": #DateTimeFormat(now(), "MMMM dd, yyyy hh:mm:ss a")#</li>
+                <li>Mask "MMMM dd, yyyy HH:mm:ss a": #DateTimeFormat(now(), "MMMM dd, yyyy HH:mm:ss a")#</li>
+            </ul>
         </bx:output>

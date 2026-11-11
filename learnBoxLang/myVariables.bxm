@@ -28,21 +28,52 @@
         final amount to the page.</p>   
 
     <p><strong>Answer</strong>: using compound add assignment operator for each book</p>
-
+    
     <!--- declare and initialize variable totalBookCost --->
     <bx:set totalBookCost = 0>
-    <!--- add cost of bookOne using compound add assignment operator --->
-    <bx:set totalBookCost += 19.99>
-    <!--- add cost of bookTwo using compound add assignment operator --->
-    <bx:set totalBookCost += 19.99>
-    <!--- add cost of bookThree using compound add assignment operator --->
-    <bx:set totalBookCost += 52.95>
-    <!--- add cost of bookFour using compound add assignment operator --->
-    <bx:set totalBookCost += 27.50>
-    <!--- add cost of bookFive using compound add assignment operator --->
-    <bx:set totalBookCost += 29.95>
+
+    <!--- Initial submission for week2 assignment, using compound add assignment operator for each book,
+        but it did not output the name and price of each book --->
     
-    <!--- https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/format/numberformat --->
+            <!--- add cost of bookOne using compound add assignment operator --->
+            <bx:set totalBookCost += 19.99>
+            <!--- add cost of bookTwo using compound add assignment operator --->
+            <bx:set totalBookCost += 19.99>
+            <!--- add cost of bookThree using compound add assignment operator --->
+            <bx:set totalBookCost += 52.95>
+            <!--- add cost of bookFour using compound add assignment operator --->
+            <bx:set totalBookCost += 27.50>
+            <!--- add cost of bookFive using compound add assignment operator --->
+            <bx:set totalBookCost += 29.95>
+            
+            <bx:output>The total book cost for five books: 
+                #NumberFormat(number=totalBookCost, mask="_$,0.00")#
+            </bx:output>
+
+
+    <!--- this section added after class chat session 11-10-2026 --->
+    <p><strong>Changed answer added after class chat session 11-10-2026</strong></p>
+
+    <!--- declare and initialize variable totalBookCost2 --->
+    <bx:set totalBookCost2 = 0>
+    <!--- output name of book and price and also tally up the total price using 
+        compound add assignment operator for each book --->
+        <ol>
+            <li>All Systems Red: $19.99</li>
+                <bx:set totalBookCost2 += 19.99 />
+            <li>Dog Grooming for Dummies: $19.99</li>
+                <bx:set totalBookCost2 += 19.99 />
+            <li>Epidemiology: $52.95</li>
+                <bx:set totalBookCost2 += 52.95 />
+            <li>Nerd do well: $27.50</li>
+                <bx:set totalBookCost2 += 27.50 />
+            <li>8 Steps to a Pain-Free Back: $29.95</li>
+                <bx:set totalBookCost2 += 29.95 />
+        </ol>
+           
+      <!--- https://boxlang.ortusbooks.com/boxlang-language/reference/built-in-functions/format/numberformat --->
     <!--- using mask for dollar currency with NumberFormat() --->
+    <br />
     <bx:output>The total book cost for five books: 
-    #NumberFormat(number=totalBookCost, mask="_$,9.99")#</bx:output>
+        #NumberFormat(number=totalBookCost2, mask="_$,0.00")#
+    </bx:output>

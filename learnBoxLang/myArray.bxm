@@ -9,7 +9,7 @@
 <br /><br />
 <p><strong>Answer</strong>: The myArray Array contains 4 structures: bookOne, bookTwo, bookThree, and bookFour</p>
 
-    
+<!--- separately define the 4 structures to be added to the myArray Array --->
 <bx:set bookOne={
     basicInfo: {
         title:"All Systems Red",
@@ -137,17 +137,160 @@
 <!--- initialize the myArray Array --->
 <bx:set myArray = []>
 
-<!--- append the 4 structures to myArray  --->
-<bx:set myArray.append(bookOne)>
-<bx:set myArray.append(bookTwo)>
-<bx:set myArray.append(bookThree)>
-<bx:set myArray.append(bookFour)>
-
+<!--- This is a different way which also works 
+    to create the array to contain the 4 structures
+        <!--- append the 4 separately defined structures to myArray  --->
+        <bx:set myArray.append(bookOne)>
+        <bx:set myArray.append(bookTwo)>
+        <bx:set myArray.append(bookThree)>
+        <bx:set myArray.append(bookFour)>
+--->
 
 <!---
     This is a different way which also works to create the 
     array to contain the 4 structures
-    bx:set myArray = [ bookOne, bookTwo, bookThree, bookFour ]
+        <!--- append the 4 separately defined structures to myArray  --->
+        <bx:set myArray = [ bookOne, bookTwo, bookThree, bookFour ] />
 --->
-    
+
+
+<!--- 
+    This is a different way which also works to create the 
+    array to contain the 4 structures
+        <!--- assign each of the 4 separately defined structures
+            to individual indices of myArray  --->
+        <bx:set myArray[1] = bookOne>
+        <bx:set myArray[2] = bookTwo>   
+        <bx:set myArray[3] = bookThree>
+        <bx:set myArray[4] = bookFour>
+--->
+
+
+<!--- added after class chat session 11-10-2026 to create myArray and all 5 structures in one step, 
+    with assistance from GitHub Copilot AI --->
+<br />
+<p><strong>Added after class chat session 11-10-2026</strong> create array with structures in one step,
+    also changed the <code>genre</code> key to <code>genres</code> and made it an array of strings for each book. Then use
+    a loop to display info about each book and tally up and display the total price. Also added the fifth book
+    from the Excel file.</p>
+<bx:set myArray = [
+    {
+        basicInfo: {
+            title:"All Systems Red", copyrightYear:"2017", price:19.99
+        },
+        categoryInfo: {
+            category: "Fiction", genres: ["Science Fiction", "adventure", "action"]
+        },
+        publisherInfo: {
+            publisher:"Tom Doherty Associates", publisherCity:"New York"
+        },
+        physicalInfo: {
+            numPages:171, height:8.25, width:5.25, thickness:0.625
+        },
+        authorInfo: {
+            authorFirstName:"Martha", authorLastName:"Wells"
+        },
+        publicationInfo: {  
+            ISBN13:"978-1-250-21471-3", language:"English", binding:"Hardcover"
+        }
+    },
+    {
+        basicInfo: {
+            title:"Dog Grooming for Dummies", copyrightYear:"2006", price:19.99
+        },
+        categoryInfo: {
+            category: "Non-Fiction", genres: ["How-to/Guides", "Pets"]  
+        },
+        publisherInfo: {
+            publisher:"Wiley Publishing Inc", publisherCity:"Indianapolis"
+        },
+        physicalInfo: {
+            numPages:392, height:9.25, width:7.5, thickness:0.825
+        },
+        authorInfo: {
+            authorFirstName:"Margaret", authorLastName:"Bonham"
+        },
+        publicationInfo: {  
+            ISBN13:"978-0-471-77390-0", language:"English", binding:"Paperback"
+        }
+    },
+    {
+        basicInfo: {
+            title:"Epidemiology", copyrightYear:"2014", price:52.95
+        },
+        categoryInfo: {
+            category: "Non-Fiction", genres: ["Science & technology", "Statistics"]
+        },
+        publisherInfo: {
+            publisher:"Elsevier Saunders", publisherCity:"New York"
+        },
+        physicalInfo: {
+            numPages:358, height:10.25, width:7.25, thickness:0.75
+        },
+        authorInfo: {
+            authorFirstName:"Leon", authorLastName:"Gordis"
+        },
+        publicationInfo: {  
+            ISBN13:"978-1-4557-3722-8", language:"English", binding:"Paperback"
+        }
+    },
+    {
+        basicInfo: {
+            title:"Nerd Do Well", copyrightYear:"2010", price:27.50
+        },
+        categoryInfo: {
+            category: "Non-Fiction", genres: ["Autobiography/Memoir", "Comedy"]
+        },
+        publisherInfo: {
+            publisher:"Penguin Group Inc", publisherCity:"New York"
+        },
+        physicalInfo: {
+            numPages:356, height:9.25, width:6.25, thickness:1.375
+        },
+        authorInfo: {
+            authorFirstName:"Simon", authorLastName:"Pegg"
+        },
+        publicationInfo: {  
+            ISBN13:"978-0-471-77390-0", language:"English", binding:"Hardcover"
+        }
+    },
+    {
+        basicInfo: {
+            title:"8 Steps to a Pain-Free Back", copyrightYear:"2008", price:29.95
+        },
+        categoryInfo: {
+            category: "Non-Fiction", genres: ["Self-help", "Health & Fitness"]
+        },
+        publisherInfo: {
+            publisher:"Pendo Press", publisherCity:"Palo Alto"
+        },
+        physicalInfo: {
+            numPages:228, height:11.0, width:8.5, thickness:0.625
+        },
+        authorInfo: {
+            authorFirstName:"Esther", authorLastName:"Gokhale"
+        },
+        publicationInfo: {  
+            ISBN13:"978-0-9793036-0-9", language:"English", binding:"Paperback"
+        }
+    }
+] />
+
+<!--- dump the myArray Array --->
 <bx:dump var="#myArray#" label="MyArray">
+
+<!--- Loop through the myArray Array and display info about each book, 
+    tally up the total price, and display the total price --->
+<br />
+Receipt:<br />
+<bx:set totalPrice = 0 />
+<bx:set numBooks = #myArray.size()# />
+<bx:loop array="#myArray#" index="bookIndex" item="bookItem">
+    <bx:output>Book #bookIndex#: #bookItem.basicInfo.title#</bx:output> by 
+    <bx:output>#bookItem.authorInfo.authorFirstName# #bookItem.authorInfo.authorLastName#</bx:output>, 
+    <bx:output>#NumberFormat(number=bookItem.basicInfo.price, mask="_$,0.00")#</bx:output>
+    <bx:set totalPrice += bookItem.basicInfo.price />
+    <br />
+</bx:loop> 
+<br />
+<bx:output>The total price of #numBooks# books: #NumberFormat(number=totalPrice, mask="_$,0.00")#</bx:output>
