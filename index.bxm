@@ -38,7 +38,7 @@
                              <li><a href="link to folder/file">Name of link </a></li>
                             
                         --->
-        
+                            <li class="nav-item"><a href="dbtest.bxm">dbtext.bxm</a></li>
                         </ul>
                     </div>
                     <div id="center" class="col-9">

@@ -19,7 +19,7 @@
                 }
             },
             "datasources" : {
-                "**DSOURCENAME**":{
+                "Deb_Shih":{
                     "database":"${PDBNAME}",
                     "dbdriver":"mysql",
                     "host":"${PHOST}",

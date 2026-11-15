@@ -1,7 +1,7 @@
 class {
 
-    this.name = 'USERNAMEHERE';
-    this.dsource = 'USERNAMEHERE';
+    this.name = 'Deb_Shih';
+    this.dsource = 'Deb_Shih';
     this.sessionmanagement = 'true';
 
     public function onApplicationStart() {
