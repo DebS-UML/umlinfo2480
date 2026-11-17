@@ -1,6 +1,6 @@
 <bx:DBInfo type="tables"
-name="Deb_Shih"
+name="yourinfo"
 datasource="Deb_Shih"
 />
 
-<bx:dump var="#Deb_Shih#" />
+<bx:dump var="#yourinfo#" />
