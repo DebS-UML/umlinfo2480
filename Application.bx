@@ -1,11 +1,11 @@
 class {
 
     this.name = 'Deb_Shih';
-    this.dsource = 'Deb_Shih';
+    this.datasource = 'Deb_Shih';
     this.sessionmanagement = 'true';
 
     public function onApplicationStart() {
-        application.dsource = this.dsource;
+        application.datasource = this.datasource;
     }
         
 }
