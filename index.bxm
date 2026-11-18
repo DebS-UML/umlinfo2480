@@ -38,7 +38,7 @@
                              <li><a href="link to folder/file">Name of link </a></li>
                             
                         --->
-                            <li class="nav-item"><a href="dbtest.bxm">dbtext.bxm</a></li>
+                            <li class="nav-item"><a href="dbtest.bxm" class="nav-link" target="_blank">dbtest.bxm</a></li>
                         </ul>
                     </div>
                     <div id="center" class="col-9">
@@ -51,7 +51,7 @@
                                     and overall keep an eye on how you're progressing. </p>
                                 <p>Whenever you create a folder in your area on the server, the item is automatically added to the navigation system
                                     on the left. By default, these will open in a new browser window. You can also add your own links and pages not
-                                    in the prescribed curriculum. In the index.cfm page there is a commented area which shows how to add your own
+                                    in the prescribed curriculum. In this index.bxm page there is a commented area which shows how to add your own
                                     content.</p>
                             
                                 <p> - Dan Card - </p>
