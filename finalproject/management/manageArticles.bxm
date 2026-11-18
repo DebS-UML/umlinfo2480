@@ -1,0 +1,40 @@
+<bx:output>
+
+<bx:set common = createObject("finalProject.common.Articles") />
+<bx:if form.keyExists("title")>
+    <bx:dump var="#form#" />
+    <bx:set articles = new finalProject.common.Articles().saveArticle(form.title, form.description, form.active) />
+</bx:if>
+
+<bx:set allArticles = common.allArticles() />
+
+
+<div class="row">
+    <div class="col-sm-3">
+        <ol>
+            <bx:loop query="allArticles">
+                <li><a href="#cgi.script_name#?id=#id#">#title#</a></li>
+            </bx:loop>
+    </div>
+    <div class="col-sm-9">
+        <form method="POST" action="#cgi.script_name#?tool=manageArticles">
+            <div class="form-floating mb-3" style="height: 60px;">
+                <input type="text" class="form-control h-100" id="floatingInput" placeholder="Article Title" name="title">
+                <label for="floatingInput">Title</label>
+            </div>
+            <div class="form-floating mb-3" style="height: 200px;">
+                <textarea class="form-control h-100" placeholder="Leave a comment here" id="floatingTextarea" name="description"></textarea>
+                <label for="floatingTextarea">Content</label>
+            </div>
+            <div class="form-check mb-3" style="height: 60px;">
+                <input class="form-check-input" type="checkbox" value="1" id="checkDefault" name="active">
+                <label class="form-check-label" for="checkDefault">
+                    Active
+                </label>
+            </div>
+            <button type="submit" class="btn btn-primary mb-3">Save</button>
+        </form>
+    </div>
+
+</div>
+</bx:output>
