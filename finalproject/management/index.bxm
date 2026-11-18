@@ -28,24 +28,5 @@
         integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
         crossorigin="anonymous">
 </script>
-<style>
-
-    .carousel-inner {
-        height: 600px;
-        background-color: rgb(160, 170, 190);
-
-    }
-    .carousel-caption {
-        background-color: rgba(211, 211, 211, 0.8);
-        padding: 10px 15px;
-        border-radius: 5px; 
-        color: #000;
-        
-        top: 50%;
-        transform: translateY(-50%); 
-        bottom: initial;
-    }
-
-</style>
 </body>
 </html>
