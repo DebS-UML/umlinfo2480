@@ -18,7 +18,7 @@
                     "readOnly":"false"
                 }
             },
-            "datasources" : {
+            "datasources":{
                 "Deb_Shih":{
                     "database":"${PDBNAME}",
                     "dbdriver":"mysql",
