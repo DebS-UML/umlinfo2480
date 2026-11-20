@@ -1,39 +1,56 @@
 <bx:output>
-
-<bx:set common = createObject("finalProject.common.Articles") />
+<bx:param name="articleId" default="-1" />
+<bx:set articleService = new finalProject.common.Articles() />
 <bx:if form.keyExists("title")>
-    <bx:dump var="#form#" />
-    <bx:set articles = new finalProject.common.Articles().saveArticle(form.title, form.description, form.active) />
+    <bx:set form.active = form.keyExists("active") ? form.active : 0 />
+    <bx:set articleService.saveArticle(form.title, form.description, form.active, form.articleId) />
 </bx:if>
 
-<bx:set allArticles = common.allArticles() />
+<bx:set allArticles = articleService.allArticles() />
 
 
 <div class="row">
     <div class="col-sm-3">
-        <ol>
-            <bx:loop query="allArticles">
-                <li><a href="#cgi.script_name#?id=#id#">#title#</a></li>
+        <ul class="list-group">
+            <li>
+                <a href="#cgi.script_name#?tool=manageArticles&articleId=0">
+                    New
+                </a>
+            </li>
+            <bx:loop array="#allArticles#" index="article">
+                <li>
+                    <a href="#cgi.script_name#?tool=manageArticles&articleId=#article.id#">
+                        #article.title#
+                    </a>
+                </li>
             </bx:loop>
+        </ul>
     </div>
     <div class="col-sm-9">
-        <form method="POST" action="#cgi.script_name#?tool=manageArticles">
-            <div class="form-floating mb-3" style="height: 60px;">
-                <input type="text" class="form-control h-100" id="floatingInput" placeholder="Article Title" name="title">
-                <label for="floatingInput">Title</label>
-            </div>
-            <div class="form-floating mb-3" style="height: 200px;">
-                <textarea class="form-control h-100" placeholder="Leave a comment here" id="floatingTextarea" name="description"></textarea>
-                <label for="floatingTextarea">Content</label>
-            </div>
-            <div class="form-check mb-3" style="height: 60px;">
-                <input class="form-check-input" type="checkbox" value="1" id="checkDefault" name="active">
-                <label class="form-check-label" for="checkDefault">
-                    Active
-                </label>
-            </div>
-            <button type="submit" class="btn btn-primary mb-3">Save</button>
-        </form>
+        <bx:if articleId gt -1>
+            <bx:set articles = articleService.getArticleById(articleId) />
+            <bx:set articleData = articles.len() ? articles[1] : {"title":"","description":"","status":0, "id":0} />
+           <bx:dump var="#articleData#" />
+            <form method="POST" action="#cgi.script_name#?tool=manageArticles">
+                <input type="hidden" name="articleId" value="#articleData.id#" />                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput" placeholder="Article Title" name="title" value="#articleData.title#" />
+                    <label for="floatingInput">Title</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 200px;">
+                    <textarea class="form-control h-100" placeholder="Leave a comment here" id="floatingTextarea" name="description">#articleData.description#</textarea>
+                    <label for="floatingTextarea">Content</label>
+                </div>
+                <div class="form-check mb-3" style="height: 60px;">
+                    <input class="form-check-input" type="checkbox" value="1" id="checkDefault" name="active" #articleData.status==1 ? "checked" : ""# />
+                    <label class="form-check-label" for="checkDefault">
+                        Active
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        
+        </bx:if>
     </div>
 
 </div>

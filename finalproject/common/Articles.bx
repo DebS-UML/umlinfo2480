@@ -1,10 +1,16 @@
 class {
 
-    function saveArticle( required string title="", required string description="", numeric status=0 ){
+    function saveArticle( required string title="", required string description="", numeric status=0, id="0" ){
+       arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
+       arguments.status = !isValid("numeric", arguments.status) ? 0 : arguments.status;
+       
        queryExecute("
-                INSERT IGNORE into articles (title, description, status) 
-                VALUES (:title, :description, :status)
+                INSERT INTO articles (id, title, description, status) 
+                VALUES (:id, :title, :description, :status)
+                ON DUPLICATE KEY UPDATE title=:title,
+                description=:description, status=:status
             ",{
+                id:arguments.id,
                 title:arguments.title,
                 description:arguments.description,
                 status: arguments.status
@@ -13,6 +19,12 @@ class {
     }
 
     function allArticles(){
-        return queryExecute("SELECT * FROM articles");
+        return queryExecute("SELECT * FROM articles",{},{returntype:"array"});
     }
+
+    function getArticleById( required numeric articleId ){
+        return queryExecute("SELECT * FROM articles WHERE id = :articleId", {articleId:arguments.articleId},{returntype:"array"});
+        
+    }
+
 }
