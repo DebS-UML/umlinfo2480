@@ -1,7 +1,7 @@
 <bx:output>
 <bx:param name="articleId" default="-1" />
 <bx:set articleService = new finalProject.common.Articles() />
-<bx:if form.keyExists("title")>
+<bx:if form.keyExists("title") && trim(form.title) != "">
     <bx:set form.active = form.keyExists("active") ? form.active : 0 />
     <bx:set articleService.saveArticle(form.title, form.description, form.active, form.articleId) />
 </bx:if>
@@ -10,7 +10,7 @@
 
 
 <div class="row">
-    <div class="col-sm-3">
+    <div class="col-sm-3 ps-5 my-3">
         <ul class="list-group">
             <li>
                 <a href="#cgi.script_name#?tool=manageArticles&articleId=0">
@@ -26,11 +26,11 @@
             </bx:loop>
         </ul>
     </div>
-    <div class="col-sm-9">
+    <div class="col-sm-9 mt-4">
         <bx:if articleId gt -1>
             <bx:set articles = articleService.getArticleById(articleId) />
             <bx:set articleData = articles.len() ? articles[1] : {"title":"","description":"","status":0, "id":0} />
-           <bx:dump var="#articleData#" />
+           <!---bx:dump var="#articleData#" /--->
             <form method="POST" action="#cgi.script_name#?tool=manageArticles">
                 <input type="hidden" name="articleId" value="#articleData.id#" />                
                 <div class="form-floating mb-3" style="height: 60px;">
