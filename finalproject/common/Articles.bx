@@ -1,6 +1,6 @@
 class {
 
-    function saveArticle( required string title="", required string description="", numeric status=0, id="0" ){
+    function saveArticle( required string title="", required string description="", numeric status=0, id=0 ){
        arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
        arguments.status = !isValid("numeric", arguments.status) ? 0 : arguments.status;
        
