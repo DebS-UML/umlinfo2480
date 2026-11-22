@@ -3,7 +3,7 @@
 <bx:set articleService = new finalProject.common.Articles() />
 <bx:if form.keyExists("title") && trim(form.title) != "">
     <bx:set form.active = form.keyExists("active") ? form.active : 0 />
-    <bx:set articleService.saveArticle(form.title, form.description, form.active, form.articleId) />
+    <bx:set articleService.saveArticle(trim(form.title), trim(form.description), form.active, form.articleId) />
 </bx:if>
 
 <bx:set allArticles = articleService.allArticles() />
