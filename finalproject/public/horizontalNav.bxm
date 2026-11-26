@@ -1,4 +1,7 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<bx:set articleService = new finalProject.common.Articles() />
+<bx:set allArticles = articleService.allArticles( active=1) />
+
+<nav class="navbar navbar-expand-xl navbar-light bg-light">
     <a class="navbar-brand" href="#">
         <a href="../public"><img src="/images/rdb.png" alt="Read Dese Books Logo"/></a>
     </a>
@@ -10,16 +13,16 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav me-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="#">Home <span class="visually-hidden">(current)</span></a>
+                <a class="nav-link" href="/finalProject/public">Home <span class="visually-hidden">(current)</span></a>
             </li>
+            <bx:output>
+                <bx:loop array=#allArticles# index="article">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#cgi.script_name#?articleId=#article.id#&tool=articles">#article.title#</a>
+                    </li>
+                </bx:loop>
+            </bx:output>
             <li class="nav-item">
-                <a class="nav-link" href="#">Store Information</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Highlighted Favorites</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="../management">Management</a>

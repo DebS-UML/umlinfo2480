@@ -20,7 +20,13 @@
                     <a class="nav-link" href="#cgi.script_name#?tool=manageBooks">Books #currClass#</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#cgi.script_name#?tool=manageUsers">Users #currClass#</a>
+                    <a class="nav-link" href="#cgi.script_name#?tool=manageUsers">People #currClass#</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cgi.script_name#?tool=manageRoles">Roles #currClass#</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#cgi.script_name#?tool=managePublishers">Publishers #currClass#</a>
                 </li>
             </ul>
         </div>

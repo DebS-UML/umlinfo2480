@@ -1,0 +1,36 @@
+class {
+
+    function saveBook( required string isbn13="", 
+        required string title="", string isbn="", numeric weight=0,
+        numeric pages=0){
+       
+       arguments.weight = !isValid("numeric", arguments.weight) ? 0 : arguments.weight;
+       arguments.pages = !isValid("numeric", arguments.pages) ? 0 : arguments.pages;
+
+       queryExecute("
+                INSERT INTO books (isbn13, title, isbn, weight, pages) 
+                VALUES (:isbn13, :title, :isbn, :weight, :pages)
+                ON DUPLICATE KEY UPDATE 
+                    title=:title, isbn=:isbn, weight=:weight, pages=:pages
+            ",{
+                isbn13:arguments.isbn13,
+                title:arguments.title,
+                isbn:arguments.isbn,
+                weight:arguments.weight,
+                pages:arguments.pages
+            });
+
+    }
+
+    function allBooks(isbn13=0){
+        var extra = isbn13 > 0 ? " where isbn13=#isbn13#" : "";
+        
+        return queryExecute("SELECT * FROM books #extra#",{},{returntype:"array"});
+    }
+
+    function getBookByIsbn13( required string isbn13 ){
+        return queryExecute("SELECT * FROM books WHERE isbn13 = :isbn13", {isbn13:arguments.isbn13},{returntype:"array"});
+        
+    }
+
+}

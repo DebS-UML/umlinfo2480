@@ -1,1 +1,14 @@
-articles.bxm
+<bx:param name="articleId" default="0" />
+<bx:set currentArticle = articleService.allArticles(id=articleID, active=1) />
+<!---bx:dump var="#currentArticle#" /--->
+
+<bx:output>
+    <bx:if currentArticle.len() EQ 0>
+        <h2>Article Not Found</h2>
+    <bx:else>
+        <h2>#currentArticle[1].title#</h2>
+        <div>
+            #currentArticle[1].description#
+        </div>
+    </bx:if>
+</bx:output>

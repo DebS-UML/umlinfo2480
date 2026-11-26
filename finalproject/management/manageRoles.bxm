@@ -1,0 +1,51 @@
+<bx:output>
+<bx:param name="roleId" default="-1" />
+<bx:set roleService = new finalProject.common.Roles() />
+<bx:if form.keyExists("name") && trim(form.name) != "">
+    <bx:set roleService.saveRole(trim(form.name), trim(form.description), form.id) />
+</bx:if>
+
+<bx:set allRoles = roleService.allRoles() />
+
+
+<div class="row">
+    <div class="col-sm-3 ps-5 my-3">
+        <ul class="list-group">
+            <li>
+                <a href="#cgi.script_name#?tool=manageRoles&roleId=0">
+                    New
+                </a>
+            </li>
+            <bx:loop array="#allRoles#" index="role">
+                <li>
+                    <a href="#cgi.script_name#?tool=manageRoles&roleId=#role.id#">
+                        #role.name#
+                    </a>
+                </li>
+            </bx:loop>
+        </ul>
+    </div>
+    <div class="col-sm-9 mt-4">
+        <bx:if roleId gt -1>
+            <bx:set roles = roleService.getRoleById(roleId) />
+            <bx:set roleData = roles.len() ? roles[1] : {"name":"", "description":"", "id":0} />
+           <!---bx:dump var="#roleData#" /--->
+            <form method="POST" action="#cgi.script_name#?tool=manageRoles">
+                <input type="hidden" name="id" value="#roleData.id#" />                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput" placeholder="Role name" name="name" value="#roleData.name#" />
+                    <label for="floatingInput">Role name</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 180px;">
+                    <textarea class="form-control h-75" placeholder="Role description" id="floatingTextarea" name="description">#roleData.description#</textarea>
+                    <label for="floatingTextarea">Role description</label>
+
+                </div>
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        
+        </bx:if>
+    </div>
+
+</div>
+</bx:output>

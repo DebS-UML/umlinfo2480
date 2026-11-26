@@ -8,6 +8,7 @@
     <link href="../includes/css/mycss.css" rel="stylesheet"/>
 </head>
 <body>
+<bx:param name="tool" default="carousel" />
 <div id="wrapper" class="container">
     <bx:include template="header.bxm" />
     <div id="horizontalnav" class="row">
@@ -15,7 +16,9 @@
     </div>
     <div id="maincontent" class="row">
         <section id="center" class="col-sm-9 order-last">
-            <bx:include template="carousel.bxm" />
+            <bx:output>
+                <bx:include template="#tool#.bxm" />
+            </bx:output>
         </section>
         <section id="left" class="col-sm-3 order-first">
             <bx:include template="genrenav.bxm" />

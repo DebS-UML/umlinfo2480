@@ -3,7 +3,7 @@
 <bx:set articleService = new finalProject.common.Articles() />
 <bx:if form.keyExists("title") && trim(form.title) != "">
     <bx:set form.active = form.keyExists("active") ? form.active : 0 />
-    <bx:set articleService.saveArticle(trim(form.title), trim(form.description), form.active, form.articleId) />
+    <bx:set articleService.saveArticle(trim(form.title), trim(form.description), form.active, form.id) />
 </bx:if>
 
 <bx:set allArticles = articleService.allArticles() />
@@ -29,20 +29,21 @@
     <div class="col-sm-9 mt-4">
         <bx:if articleId gt -1>
             <bx:set articles = articleService.getArticleById(articleId) />
-            <bx:set articleData = articles.len() ? articles[1] : {"title":"","description":"","status":0, "id":0} />
+            <bx:set articleData = articles.len() ? articles[1] : {"title":"","description":"","active":0, "id":0} />
            <!---bx:dump var="#articleData#" /--->
             <form method="POST" action="#cgi.script_name#?tool=manageArticles">
-                <input type="hidden" name="articleId" value="#articleData.id#" />                
+                <input type="hidden" name="id" value="#articleData.id#" />                
                 <div class="form-floating mb-3" style="height: 60px;">
                     <input type="text" class="form-control h-100" id="floatingInput" placeholder="Article Title" name="title" value="#articleData.title#" />
                     <label for="floatingInput">Title</label>
                 </div>
-                <div class="form-floating mb-3" style="height: 200px;">
-                    <textarea class="form-control h-100" placeholder="Leave a comment here" id="floatingTextarea" name="description">#articleData.description#</textarea>
-                    <label for="floatingTextarea">Content</label>
+                <div class="mb-3" style="height: 440px;">
+                    <label for="textarea">Description</label>
+                    <textarea class="form-control h-75" placeholder="Leave a comment here" id="textarea" name="description">#articleData.description#</textarea>
+
                 </div>
                 <div class="form-check mb-3" style="height: 60px;">
-                    <input class="form-check-input" type="checkbox" value="1" id="checkDefault" name="active" #articleData.status==1 ? "checked" : ""# />
+                    <input class="form-check-input" type="checkbox" value="1" id="checkDefault" name="active" #articleData.active==1 ? "checked" : ""# />
                     <label class="form-check-label" for="checkDefault">
                         Active
                     </label>
@@ -55,3 +56,14 @@
 
 </div>
 </bx:output>
+<script src="https://cdn.jsdelivr.net/npm/hugerte@1.0.15/hugerte.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/hugerte@1.0.15/skins/ui/oxide/skin.min.css">
+<script type="text/javascript">
+    hugerte.init({
+        selector: 'textarea', // change this value according to your HTML
+        plugins: 'a_hugerte_plugin',
+        a_plugin_option: true,
+        a_configuration_option: 400
+    
+    });
+</script>

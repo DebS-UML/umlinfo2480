@@ -1,1 +1,65 @@
-manageUsers.bxm
+<bx:output>
+<bx:param name="userId" default="-1" />
+<bx:set userService = new finalProject.common.Users() />
+<bx:if form.keyExists("lastName") && trim(form.lastName) != "">
+    <bx:set userService.savePerson(trim(form.firstName), trim(form.lastName),
+    trim(form.middleName), trim(form.email), trim(form.bio), form.id) />
+</bx:if>
+
+<bx:set allUsers = userService.allPeople() />
+
+
+<div class="row">
+    <div class="col-sm-3 ps-5 my-3">
+        <ul class="list-group">
+            <li>
+                <a href="#cgi.script_name#?tool=manageUsers&userId=0">
+                    New
+                </a>
+            </li>
+            <bx:loop array="#allUsers#" index="user">
+                <li>
+                    <a href="#cgi.script_name#?tool=manageUsers&userId=#user.id#">
+                        #user.firstName# #user.lastName#
+                    </a>
+                </li>
+            </bx:loop>
+        </ul>
+    </div>
+    <div class="col-sm-9 mt-4">
+        <bx:if userId gt -1>
+            <bx:set users = userService.getPersonById(userId) />
+            <bx:set userData = users.len() ? users[1] : {"firstName":"","lastName":"", "middleName":"",
+                "email":"","bio":"", "id":0} />
+           <!---bx:dump var="#userData#" /--->
+            <form method="POST" action="#cgi.script_name#?tool=manageUsers">
+                <input type="hidden" name="id" value="#userData.id#" />                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput01" placeholder="First Name" name="firstName" value="#userData.firstName#" />
+                    <label for="floatingInput01">First Name</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput02" placeholder="Last Name" name="lastName" value="#userData.lastName#" />
+                    <label for="floatingInput02">Last Name</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput03" placeholder="Middle Name" name="middleName" value="#userData.middleName#" />
+                    <label for="floatingInput03">Middle Name</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="email" class="form-control h-100" id="floatingInput04" placeholder="Email" name="email" value="#userData.email#" />
+                    <label for="floatingInput04">Email</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 180px;">
+                    <textarea class="form-control h-100" id="floatingTextArea" placeholder="Bio" name="bio">#userData.bio#</textarea>
+                    <label for="floatingTextArea">Bio</label>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        
+        </bx:if>
+    </div>
+
+</div>
+</bx:output>

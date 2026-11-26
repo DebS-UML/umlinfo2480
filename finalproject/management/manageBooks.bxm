@@ -1,1 +1,73 @@
-manageBooks.bxm
+<bx:output>
+<bx:param name="bookId" default="-1" />
+<bx:set bookService = new finalProject.common.Books() />
+<bx:if form.keyExists("isbn13") && trim(form.isbn13) != "">
+    <bx:set bookService.saveBook(trim(form.isbn13), trim(form.title), 
+        trim(form.isbn), form.weight, form.pages) />
+</bx:if>
+
+<bx:set allBooks = bookService.allBooks() />
+
+<div class="row">
+    <div class="col-sm-3 ps-5 my-3">
+        <ul class="list-group">
+            <li>
+                <a href="#cgi.script_name#?tool=manageBooks&bookId=0">
+                    New
+                </a>
+            </li>
+
+           <bx:loop array="#allBooks#" index="book">
+                <li>
+                    <a href="#cgi.script_name#?tool=manageBooks&bookId=#book.isbn13#">
+                        #book.title#
+                    </a>
+                </li>
+            </bx:loop>
+      
+        </ul>
+    </div>
+
+    <div class="col-sm-9 mt-4">
+        <bx:if bookId gt -1>
+            <bx:set books = bookService.getBookByIsbn13(bookId) />
+            <bx:set bookData = books.len() ? books[1] : {"isbn13":"", "title":"", "isbn":"", "weight":0, "pages":0} />
+           <!---bx:dump var="#bookData#" /--->
+            <form method="POST" action="#cgi.script_name#?tool=manageBooks">
+
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="number" class="form-control h-100" id="floatingInput01" placeholder="ISBN13" name="isbn13" value="#bookData.isbn13#" />
+                    <label for="floatingInput01">ISBN13</label>
+                </div>
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput02" placeholder="Title" name="title" value="#bookData.title#" />
+                    <label for="floatingInput02">Title</label>
+                </div>
+                                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="number" class="form-control h-100" id="floatingInput03" placeholder="ISBN" name="isbn" value="#bookData.isbn#" />
+                    <label for="floatingInput03">ISBN</label>
+                </div>                
+                <div class="row mb-3">
+                    <div class="col-sm-6">
+                        <div class="form-floating" style="height: 60px;">
+                            <input type="number" class="form-control h-100" id="floatingInput04" placeholder="Weight" name="weight" value="#bookData.weight#" />
+                            <label for="floatingInput04">Weight</label>
+                        </div>    
+                    </div/>
+                    <div class="col-sm-6">            
+                        <div class="form-floating" style="height: 60px;">
+                            <input type="number" class="form-control h-100" id="floatingInput05" placeholder="Pages" name="pages" value="#bookData.pages#" />
+                            <label for="floatingInput05">Pages</label>
+                        </div>
+                </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        
+        </bx:if>
+    </div>
+
+</div>
+</bx:output>

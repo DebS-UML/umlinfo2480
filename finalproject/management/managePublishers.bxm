@@ -1,0 +1,67 @@
+<bx:output>
+<bx:param name="publisherId" default="-1" />
+<bx:set publisherService = new finalProject.common.Publishers() />
+<bx:if form.keyExists("name") && trim(form.name) != "">
+    <bx:set publisherService.savePublisher(trim(form.name), trim(form.street), 
+        trim(form.city), trim(form.state), form.id) />
+</bx:if>
+
+<bx:set allPublishers = publisherService.allPublishers() />
+
+
+<div class="row">
+    <div class="col-sm-3 ps-5 my-3">
+        <ul class="list-group">
+            <li>
+                <a href="#cgi.script_name#?tool=managePublishers&publisherId=0">
+                    New
+                </a>
+            </li>
+            <bx:loop array="#allPublishers#" index="publisher">
+                <li>
+                    <a href="#cgi.script_name#?tool=managePublishers&publisherId=#publisher.id#">
+                        #publisher.name#
+                    </a>
+                </li>
+            </bx:loop>
+        </ul>
+    </div>
+    <div class="col-sm-9 mt-4">
+        <bx:if publisherId gt -1>
+            <bx:set publishers = publisherService.getPublisherById(publisherId) />
+            <bx:set publisherData = publishers.len() ? publishers[1] : {"name":"", "street":"", "city":"", "state":"", "id":0} />
+           <!---bx:dump var="#publisherData#" /--->
+            <form method="POST" action="#cgi.script_name#?tool=managePublishers">
+                <input type="hidden" name="id" value="#publisherData.id#" />                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput01" placeholder="Publisher name" name="name" value="#publisherData.name#" />
+                    <label for="floatingInput01">Publisher name</label>
+                </div>
+                                
+                <div class="form-floating mb-3" style="height: 60px;">
+                    <input type="text" class="form-control h-100" id="floatingInput02" placeholder="Street" name="street" value="#publisherData.street#" />
+                    <label for="floatingInput02">Street</label>
+                </div>                
+                <div class="row mb-3">
+                    <div class="col-sm-9">
+                        <div class="form-floating" style="height: 60px;">
+                            <input type="text" class="form-control h-100" id="floatingInput03" placeholder="City" name="city" value="#publisherData.city#" />
+                            <label for="floatingInput03">City</label>
+                        </div>    
+                    </div/>
+                    <div class="col-sm-3">            
+                        <div class="form-floating" style="height: 60px;">
+                            <input type="text" class="form-control h-100" id="floatingInput04" placeholder="State" name="state" value="#publisherData.state#" />
+                            <label for="floatingInput04">State</label>
+                        </div>
+                </div>
+                </div>
+
+                <button type="submit" class="btn btn-primary mb-3">Save</button>
+            </form>
+        
+        </bx:if>
+    </div>
+
+</div>
+</bx:output>

@@ -1,0 +1,37 @@
+class {
+
+    function savePerson( required string firstName="", required string lastName="", 
+        string middleName="", required string email="", 
+        string bio="", id=0 ){
+       arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
+       
+       queryExecute("
+                INSERT INTO people(id, firstName, lastName, middleName, email, bio) 
+                VALUES (:id, :firstName, :lastName, :middleName, :email, :bio)
+                ON DUPLICATE KEY UPDATE firstName=:firstName,
+                    lastName=:lastName, middleName=:middleName,
+                    email=:email, bio=:bio
+            ",{
+                id:arguments.id,
+                firstName:arguments.firstName,
+                lastName:arguments.lastName,
+                middleName:arguments.middleName,
+                email:arguments.email,
+
+                bio:arguments.bio
+            });
+
+    }
+
+    function allPeople(id=0){
+        var extra = id > 0 ? " where id=#id#" : "";
+        
+        return queryExecute("SELECT * FROM people #extra#",{},{returntype:"array"});
+    }
+
+    function getPersonById( required numeric personId ){
+        return queryExecute("SELECT * FROM people WHERE id = :personId", {personId:arguments.personId},{returntype:"array"});
+        
+    }
+
+}

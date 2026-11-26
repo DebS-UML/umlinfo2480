@@ -1,0 +1,30 @@
+class {
+
+    function saveRole( required string name="", required string description="", id=0 ){
+       arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
+       
+       queryExecute("
+                INSERT INTO roles (id, name, description) 
+                VALUES (:id, :name, :description)
+                ON DUPLICATE KEY UPDATE name=:name,
+                description=:description
+            ",{
+                id:arguments.id,
+                name:arguments.name,
+                description:arguments.description,
+            });
+
+    }
+
+    function allRoles(id=0){
+        var extra = id > 0 ? " where id=#id#" : "";
+        
+        return queryExecute("SELECT * FROM roles #extra#",{},{returntype:"array"});
+    }
+
+    function getRoleById( required numeric roleId ){
+        return queryExecute("SELECT * FROM roles WHERE id = :roleId", {roleId:arguments.roleId},{returntype:"array"});
+        
+    }
+
+}

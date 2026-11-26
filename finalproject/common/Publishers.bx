@@ -1,0 +1,33 @@
+class {
+
+    function savePublisher( required string name="", 
+        string street="", string city="", string state="", id=0 ){
+       arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
+       
+       queryExecute("
+                INSERT INTO publishers (id, name, street, city, state) 
+                VALUES (:id, :name, :street, :city, :state)
+                ON DUPLICATE KEY UPDATE name=:name,
+                    street=:street, city=:city, state=:state
+            ",{
+                id:arguments.id,
+                name:arguments.name,
+                street:arguments.street,
+                city:arguments.city,
+                state:arguments.state
+            });
+
+    }
+
+    function allPublishers(id=0){
+        var extra = id > 0 ? " where id=#id#" : "";
+        
+        return queryExecute("SELECT * FROM publishers #extra#",{},{returntype:"array"});
+    }
+
+    function getPublisherById( required numeric publisherId ){
+        return queryExecute("SELECT * FROM publishers WHERE id = :publisherId", {publisherId:arguments.publisherId},{returntype:"array"});
+        
+    }
+
+}

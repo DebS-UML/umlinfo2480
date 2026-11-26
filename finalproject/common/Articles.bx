@@ -1,25 +1,28 @@
 class {
 
-    function saveArticle( required string title="", required string description="", numeric status=0, id=0 ){
+    function saveArticle( required string title="", required string description="", numeric active=0, id=0 ){
        arguments.id = !isValid("numeric", arguments.id) ? 0 : arguments.id;
-       arguments.status = !isValid("numeric", arguments.status) ? 0 : arguments.status;
+       arguments.active = !isValid("numeric", arguments.active) ? 0 : arguments.active;
        
        queryExecute("
-                INSERT INTO articles (id, title, description, status) 
-                VALUES (:id, :title, :description, :status)
+                INSERT INTO articles (id, title, description, active) 
+                VALUES (:id, :title, :description, :active)
                 ON DUPLICATE KEY UPDATE title=:title,
-                description=:description, status=:status
+                description=:description, active=:active
             ",{
                 id:arguments.id,
                 title:arguments.title,
                 description:arguments.description,
-                status: arguments.status
+                active: arguments.active
             });
 
     }
 
-    function allArticles(){
-        return queryExecute("SELECT * FROM articles",{},{returntype:"array"});
+    function allArticles( active=-1, id=0){
+        var extra = active > -1 ? " where active=#active#" : "";
+        extra &= id > 0 ? " and id=#id#" : "";
+        
+        return queryExecute("SELECT * FROM articles #extra#",{},{returntype:"array"});
     }
 
     function getArticleById( required numeric articleId ){
