@@ -1,8 +1,8 @@
 class {
 
     function saveBook( required string isbn13="", 
-        required string title="", string isbn="", numeric weight=0,
-        numeric pages=0){
+        required string title="", string isbn="", weight=0,
+        pages=0){
        
        arguments.weight = !isValid("numeric", arguments.weight) ? 0 : arguments.weight;
        arguments.pages = !isValid("numeric", arguments.pages) ? 0 : arguments.pages;

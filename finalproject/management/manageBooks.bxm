@@ -1,7 +1,7 @@
 <bx:output>
 <bx:param name="bookId" default="-1" />
 <bx:set bookService = new finalProject.common.Books() />
-<bx:if form.keyExists("isbn13") && trim(form.isbn13) != "">
+<bx:if form.keyExists("isbn13") && form.keyExists("title") && trim(form.title) != "" && trim(form.isbn13) != "">
     <bx:set bookService.saveBook(trim(form.isbn13), trim(form.title), 
         trim(form.isbn), form.weight, form.pages) />
 </bx:if>
